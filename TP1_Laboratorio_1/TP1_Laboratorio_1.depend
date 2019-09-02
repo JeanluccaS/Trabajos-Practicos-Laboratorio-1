@@ -1,0 +1,8 @@
+# depslib dependency file v1.0
+1567416443 source:c:\users\xaluc\desktop\tp1_laboratorio_1\funciones.c
+	"prototipos.h"
+
+1567416443 c:\users\xaluc\desktop\tp1_laboratorio_1\prototipos.h
+	<stdio.h>
+	<stdlib.h>
+
