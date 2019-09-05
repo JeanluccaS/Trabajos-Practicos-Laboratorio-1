@@ -10,33 +10,33 @@ int main()
     float resultadoDivision;
     float factorialNumero1;
     float factorialNumero2;
-    int flag=0;
+    int flag=0; /** Bandera utilizada como validacion de ingreso de numeros  */
     do
     {
         if(flag==0)
         {
-            printf("1. Ingresar el primer numero:(A = x) \n2. Ingresar el segundo numero: (B = y)\n3. Calcular todas las operaciones (suma, resta, multiplicacion, division y factorial)\n4. Mostrar resultados\n5. Salir\n Seleccione una opcion.\n");
+            printf("1. Ingresar el primer numero:(A = x) \n2. Ingresar el segundo numero: (B = y)\n3. Calcular todas las operaciones (suma, resta, multiplicacion, division y factorial)\n4. Mostrar resultados\n5. Salir\nSeleccione una opcion.\n");
         }
-        else if(flag==1) /** A=numero1 */
+        else if(flag==1)
         {
             if(numero2==0)
             {
-                printf("1. Ingresar el primer numero: (A = %.2f)\n2. Ingresar el segundo numero: (B = y)\n3. Calcular todas las operaciones (suma, resta, multiplicacion, division y factorial)\n4. Mostrar resultados\n5. Salir\n Seleccione una opcion.\n",numero1);
+                printf("1. Ingresar el primer numero: (A = %.2f)\n2. Ingresar el segundo numero: (B = y)\n3. Calcular todas las operaciones (suma, resta, multiplicacion, division y factorial)\n4. Mostrar resultados\n5. Salir\nSeleccione una opcion.\n",numero1);
             }
             else
             {
-                printf("1. Ingresar el primer numero: (A = %.2f)\n2. Ingresar el segundo numero: (B = %.2f)\n3. Calcular todas las operaciones (suma, resta, multiplicacion, division y factorial)\n4. Mostrar resultados\n5. Salir\n Seleccione una opcion.\n",numero1,numero2);
+                printf("1. Ingresar el primer numero: (A = %.2f)\n2. Ingresar el segundo numero: (B = %.2f)\n3. Calcular todas las operaciones (suma, resta, multiplicacion, division y factorial)\n4. Mostrar resultados\n5. Salir\nSeleccione una opcion.\n",numero1,numero2);
             }
         }
-        else if(flag==2) /** B=numero2 */
+        else if(flag>=2)
         {
             if(numero1==0)
             {
-                printf("1. Ingresar el primer numero:(A = x) \n2. Ingresar el segundo numero:(B = %.2f) \n3. Calcular todas las operaciones (suma, resta, multiplicacion, division y factorial)\n4. Mostrar resultados\n5. Salir\n Seleccione una opcion.\n",numero2);
+                printf("1. Ingresar el primer numero:(A = x) \n2. Ingresar el segundo numero:(B = %.2f) \n3. Calcular todas las operaciones (suma, resta, multiplicacion, division y factorial)\n4. Mostrar resultados\n5. Salir\nSeleccione una opcion.\n",numero2);
             }
             else
             {
-                printf("1. Ingresar el primer numero:(A = %.2f) \n2. Ingresar el segundo numero:(B = %.2f) \n3. Calcular todas las operaciones (suma, resta, multiplicacion, division y factorial)\n4. Mostrar resultados\n5. Salir\n Seleccione una opcion.\n",numero1,numero2);
+                printf("1. Ingresar el primer numero:(A = %.2f) \n2. Ingresar el segundo numero:(B = %.2f) \n3. Calcular todas las operaciones (suma, resta, multiplicacion, division y factorial)\n4. Mostrar resultados\n5. Salir\nSeleccione una opcion.\n",numero1,numero2);
             }
         }
         scanf("%d",&opcion);
@@ -64,14 +64,15 @@ int main()
                 resultadoDivision=dividir(numero1,numero2);
                 factorialNumero1=factorial(numero1);
                 factorialNumero2=factorial(numero2);
+                flag=3;
             }
             else
             {
-                printf("No se han introducido numeros para poder realizar operaciones");
+                printf("No se han introducido numeros para poder realizar operaciones\n");
             }
             break;
         case 4:
-            if(flag!=0)
+            if(flag==3)
             {
                 printf("El resultado de la suma entre:  %.2f y %.2f es: %.2f\n",numero1,numero2,resultadoSuma);
                 printf("El resultado de la resta entre: %.2f y %.2f es: %.2f\n",numero1,numero2,resultadoResta);
@@ -105,7 +106,7 @@ int main()
             }
             else
             {
-                printf("No se han introducido  numeros para poder realizar operaciones");
+                printf("No se han introducido numeros para poder realizar operaciones\n");
             }
 
             break;
