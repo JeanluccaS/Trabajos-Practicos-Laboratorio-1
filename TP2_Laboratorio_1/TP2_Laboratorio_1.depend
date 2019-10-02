@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1569987810 source:c:\users\xaluc\desktop\trabajos practicos\trabajos-practicos-laboratorio-1\tp2_laboratorio_1\main.c
+	"Prototipos.h"
+
+1569979237 c:\users\xaluc\desktop\trabajos practicos\trabajos-practicos-laboratorio-1\tp2_laboratorio_1\prototipos.h
+	<string.h>
+	<stdio.h>
+	<stdlib.h>
+
+1569987485 source:c:\users\xaluc\desktop\trabajos practicos\trabajos-practicos-laboratorio-1\tp2_laboratorio_1\funciones.c
+	"Prototipos.h"
+
