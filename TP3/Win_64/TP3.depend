@@ -104,7 +104,7 @@
 	<string.h>
 	<stdio.h>
 
-1572703930 source:c:\users\alumno\desktop\pipo\trabajos-practicos-laboratorio-1\tp3\win_64\main.c
+1572705947 source:c:\users\alumno\desktop\pipo\trabajos-practicos-laboratorio-1\tp3\win_64\main.c
 	<stdio.h>
 	<stdlib.h>
 	"LinkedList.h"
@@ -136,6 +136,6 @@
 1572697642 source:c:\users\alumno\desktop\pipo\trabajos-practicos-laboratorio-1\tp3\win_64\pedirdatos.c
 	"pedirDatos.h"
 
-1572704850 source:c:\users\alumno\desktop\pipo\trabajos-practicos-laboratorio-1\tp3\win_64\controller.c
+1572704996 source:c:\users\alumno\desktop\pipo\trabajos-practicos-laboratorio-1\tp3\win_64\controller.c
 	"Controller.h"
 
