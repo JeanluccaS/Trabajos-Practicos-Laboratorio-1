@@ -32,6 +32,10 @@ int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
  */
 int controller_loadFromBinary(char* path, LinkedList* pArrayListEmployee)
 {
+    FILE* pArchivo;
+
+    pArchivo=fopen(path,"wb");
+
     return 1;
 }
 
@@ -44,14 +48,20 @@ int controller_loadFromBinary(char* path, LinkedList* pArrayListEmployee)
  */
 int controller_addEmployee(LinkedList* pArrayListEmployee)
 {
+    int id;
     char nombre[51];
     int horasTrabajadas;
     int sueldo;
     int respuesta;
     int retorno=-1;
     Employee* unEmpleado = employee_new();
+
     if(pArrayListEmployee!=NULL)
     {
+
+        id=dameMayorId(pArrayListEmployee);
+        id++;
+        employee_setId(unEmpleado,id);
         pedirString("Ingrese el nombre del empleado ",nombre,"Error, sobrepaso el limite de caracteres (50)");
         employee_setNombre(unEmpleado,nombre);
         horasTrabajadas = pedirEntero("Ingrese las horas trabajadas del Empleado ");
@@ -164,8 +174,10 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
     {
         controller_ListEmployee(pArrayListEmployee);
         id=pedirEntero("Ingrese el ID del empleado que desea eliminar: ");
-        id--;
-        unEmpleado=(Employee*)ll_get(pArrayListEmployee,id);
+
+        unEmpleado=controller_getEmpleadoPorId(pArrayListEmployee,id);
+
+        mostrarEmpleado(unEmpleado);
         if(unEmpleado!=NULL)
         {
             mostrarEmpleado(unEmpleado);
@@ -225,7 +237,51 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+    int retorno;
+    int opcion;
+    int orden;
+
+    if(pArrayListEmployee!=NULL)
+    {
+        do
+        {
+            opcion=pedirEntero("Ingrese el criterio de Ordenamiento.\n 1) Ordenar por nombre.\n2) Ordenar por ID.\n3) Ordenar por horas trabajadas.\n4) Ordenar por sueldo.\n5)Salir.");
+            switch(opcion)
+            {
+            case 1:
+               orden=pedirEntero("Ingrese '1' para ordenar de manera descendete o '2' para ordenarlo de manera ascendente");
+               ll_sort(pArrayListEmployee,compararPorNombre,orden-1);
+
+                break;
+            case 2:
+                orden=pedirEntero("Ingrese '1' para ordenar de manera descendete o '2' para ordenarlo de manera ascendente");
+                ll_sort(pArrayListEmployee,compararPorLegajo,orden -1);
+                break;
+            case 3:
+                orden=pedirEntero("Ingrese '1' para ordenar de manera descendete o '2' para ordenarlo de manera ascendente");
+
+                break;
+            case 4:
+                orden=pedirEntero("Ingrese '1' para ordenar de manera descendete o '2' para ordenarlo de manera ascendente");
+
+                break;
+            case 5:
+                printf("Saliendo");
+                break;
+            default:
+                printf("Opcion incorrecta");
+
+            }
+        }while(opcion!=5);
+        retorno=1;
+
+
+
+    }
+
+
+
+    return retorno;
 }
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).
@@ -281,6 +337,56 @@ int controller_saveAsBinary(char* path, LinkedList* pArrayListEmployee)
 {
 
     return 1;
+}
+
+int dameMayorId(LinkedList* pArrayListEmployee)
+{
+    int flag=0;
+    int len;
+    int retorno=-1;
+    int idMayor=0;
+    int i;
+    Employee* unEmpleado;
+
+    if(pArrayListEmployee!=NULL)
+    {
+
+        len=ll_len(pArrayListEmployee);
+        for(i=25;i<len;i++)
+        {
+            unEmpleado = (Employee*)ll_get(pArrayListEmployee,i);
+
+            if(flag == 0 || unEmpleado->id > idMayor)
+            {
+                idMayor=unEmpleado->id;
+                retorno=idMayor;
+                flag=1;
+
+            }
+        }
+
+    }
+
+    return retorno;
+}
+
+void* controller_getEmpleadoPorId(LinkedList* pArrayListEmployee,int id)
+{
+    int i;
+    int len;
+    Employee* unEmpleado=NULL;
+
+    len=ll_len(pArrayListEmployee);
+    for(i=0;i<len;i++)
+    {
+        unEmpleado=(Employee*)ll_get(pArrayListEmployee,i);
+        if(unEmpleado->id==id)
+        {
+            return unEmpleado;
+            break;
+        }
+    }
+    return unEmpleado;
 }
 
 

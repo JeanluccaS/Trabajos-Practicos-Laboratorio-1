@@ -96,3 +96,46 @@
 1572408418 c:\users\xaluc\desktop\tp3\win_64\pedirdatos.h
 	"Employee.h"
 
+1572704940 source:c:\users\alumno\desktop\pipo\trabajos-practicos-laboratorio-1\tp3\win_64\employee.c
+	"Employee.h"
+
+1572704902 c:\users\alumno\desktop\pipo\trabajos-practicos-laboratorio-1\tp3\win_64\employee.h
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+
+1572703930 source:c:\users\alumno\desktop\pipo\trabajos-practicos-laboratorio-1\tp3\win_64\main.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"Controller.h"
+	"Employee.h"
+
+1572697642 c:\users\alumno\desktop\pipo\trabajos-practicos-laboratorio-1\tp3\win_64\linkedlist.h
+
+1572704947 c:\users\alumno\desktop\pipo\trabajos-practicos-laboratorio-1\tp3\win_64\controller.h
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"parser.h"
+	"Employee.h"
+	"pedirDatos.h"
+
+1572697642 c:\users\alumno\desktop\pipo\trabajos-practicos-laboratorio-1\tp3\win_64\parser.h
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"Employee.h"
+
+1572697642 c:\users\alumno\desktop\pipo\trabajos-practicos-laboratorio-1\tp3\win_64\pedirdatos.h
+	"Employee.h"
+
+1572697642 source:c:\users\alumno\desktop\pipo\trabajos-practicos-laboratorio-1\tp3\win_64\parser.c
+	"parser.h"
+
+1572697642 source:c:\users\alumno\desktop\pipo\trabajos-practicos-laboratorio-1\tp3\win_64\pedirdatos.c
+	"pedirDatos.h"
+
+1572704850 source:c:\users\alumno\desktop\pipo\trabajos-practicos-laboratorio-1\tp3\win_64\controller.c
+	"Controller.h"
+

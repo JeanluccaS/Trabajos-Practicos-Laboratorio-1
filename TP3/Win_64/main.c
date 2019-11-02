@@ -33,6 +33,9 @@ int main()
             case 1:
                 controller_loadFromText("data.csv",listaEmpleados);
                 break;
+            case 3:
+                controller_addEmployee(listaEmpleados);
+                break;
             case 4:
                 controller_editEmployee(listaEmpleados);
                 break;
@@ -41,6 +44,9 @@ int main()
                 break;
             case 6:
                 controller_ListEmployee(listaEmpleados);
+                break;
+            case 7:
+                controller_sortEmployee(listaEmpleados);
                 break;
             case 8:
                 controller_saveAsText("data.csv",listaEmpleados);
