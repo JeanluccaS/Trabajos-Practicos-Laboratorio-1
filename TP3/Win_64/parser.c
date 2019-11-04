@@ -26,6 +26,7 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
         unEmpleado=employee_newParametros(id,nombre,horasTrabajadas,sueldo);
         ll_add(pArrayListEmployee,unEmpleado);
     }
+    fclose(pFile);
     retorno=1;
     }
     else
@@ -45,7 +46,29 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
  */
 int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 {
+    int retorno;
+
+    if(pFile != NULL && pArrayListEmployee!=NULL)
+    {
+        while(!feof(pFile))
+        {
 
 
-    return 1;
+            Employee* unEmpleado;
+            unEmpleado=employee_new();
+                fread(unEmpleado,sizeof(Employee),1,pFile);
+
+
+            if(feof(pFile))
+            {
+                break;
+            }
+            ll_add(pArrayListEmployee,unEmpleado);
+        }
+        fclose(pFile);
+        retorno=1;
+    }
+
+
+    return retorno;
 }

@@ -31,7 +31,7 @@ int employee_getSueldo(Employee* this,int* sueldo);
 int compararPorLegajo(void*,void*);
 int compararPorSueldo(void*,void*);
 int compararPorNombre(void*,void*);
-
+int compararPorHorasTrabajadas(void*,void*);
 void mostrarEmpleado(Employee* emp);
 
 #endif // employee_H_INCLUDED

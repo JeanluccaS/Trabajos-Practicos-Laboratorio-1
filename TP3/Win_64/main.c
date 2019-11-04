@@ -22,6 +22,8 @@
 int main()
 {
     int opcion;
+    int respuesta;
+    int flag=0;
     LinkedList* listaEmpleados = ll_newLinkedList();
 
     do{
@@ -31,9 +33,37 @@ int main()
         switch(opcion)
         {
             case 1:
-                 system("cls");
-                controller_loadFromText("data.csv",listaEmpleados);
+                system("cls");
+                respuesta= controller_loadFromText("data.csv",listaEmpleados);
+
+                if(respuesta==1)
+                {
+                    printf("Se cargaron los Empleados correctamente.\n");
+                    flag=1;
+                 }else
+                {
+                    printf("No se pudieron cargar los empleados.");
+                }
                 system("pause");
+                break;
+            case 2:
+                system("cls");
+                if(flag!=1)
+                {
+                    respuesta= controller_loadFromBinary("data.bin",listaEmpleados);
+               if(respuesta==1)
+                {
+                    printf("Se cargaron los Empleados correctamente.\n");
+                }else
+                {
+                    printf("No se pudieron cargar los empleados.");
+                }
+                system("pause");
+                }else
+                {
+                    printf("No es posible cargar en binario, cuando se cargo previamente en texto.");
+                }
+
                 break;
             case 3:
                  system("cls");
@@ -41,17 +71,31 @@ int main()
                 system("pause");
                 break;
             case 4:
-                 system("cls");
+                if(flag=1)
+                {
+                     system("cls");
                 controller_editEmployee(listaEmpleados);
                 system("pause");
+                }else
+                {
+                    printf("Deben haber empleados cargados previamente.");
+                }
+
                 break;
             case 5:
-                 system("cls");
+                if(flag = 1)
+                {
+                     system("cls");
                 controller_removeEmployee(listaEmpleados);
                 system("pause");
+                }else
+                {
+                    printf("Deben haber empleados cargados previamente.");
+                }
+
                 break;
             case 6:
-                 system("cls");
+
                 controller_ListEmployee(listaEmpleados);
                 system("pause");
                 break;
@@ -70,6 +114,13 @@ int main()
                 controller_saveAsBinary("data.bin",listaEmpleados);
                 system("pause");
                 break;
+            case 10:
+                system("cls");
+                printf("Saliendo.\n");
+                system("pause");
+                break;
+            default:
+                printf("Opcion incorrecta\n");
         }
     }while(opcion != 10);
 

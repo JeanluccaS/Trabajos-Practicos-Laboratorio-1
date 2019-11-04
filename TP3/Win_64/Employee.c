@@ -225,6 +225,28 @@ int compararPorSueldo(void* e1,void* e2)
     return compara;
 }
 
+int compararPorHorasTrabajadas(void* e1,void* e2)
+{
+    int compara=-1;
+    int horas1;
+    int horas2;
+
+    Employee* empleado1=(Employee*)e1;
+    Employee* empleado2=(Employee*)e2;
+    employee_getHorasTrabajadas(empleado1,&horas1);
+    employee_getHorasTrabajadas(empleado2,&horas2);
+
+    if(horas1 > horas2)
+    {
+        compara=1;
+    }
+    else if(horas1 == horas2)
+    {
+        compara = 0;
+    }
+    return compara;
+}
+
 int compararPorNombre(void* e1,void* e2)
 {
     int compara=-1;
@@ -242,6 +264,8 @@ int compararPorNombre(void* e1,void* e2)
     compara=strcmp(n1,n2);
     return compara;
 }
+
+
 
 void employee_delete(Employee* unEmpleado)
 {

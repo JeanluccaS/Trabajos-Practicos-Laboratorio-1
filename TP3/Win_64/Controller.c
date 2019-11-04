@@ -11,15 +11,12 @@
 int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
 {
     FILE* pArchivo;
-    int retorno;
-    pArchivo = fopen(path,"r");
+    int retorno=-1;
+    pArchivo = fopen(path,"rb");
     if(pArchivo!=NULL)
     {
-
         retorno=parser_EmployeeFromText(pArchivo,pArrayListEmployee);
-        fclose(pArchivo);
     }
-
     return retorno;
 }
 
@@ -33,10 +30,13 @@ int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
 int controller_loadFromBinary(char* path, LinkedList* pArrayListEmployee)
 {
     FILE* pArchivo;
-
-    pArchivo=fopen(path,"wb");
-
-    return 1;
+    int retorno=-1;
+    pArchivo=fopen(path,"rb");
+    if(pArchivo!= NULL && pArrayListEmployee !=NULL)
+    {
+        retorno=parser_EmployeeFromBinary(pArchivo,pArrayListEmployee);
+    }
+    return retorno;
 }
 
 /** \brief Alta de empleados
@@ -209,10 +209,11 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
     int i;
     int len;
     int retorno=-1;
+    Employee* unEmpleado=NULL;
     if(pArrayListEmployee!=NULL)
     {
         len=ll_len(pArrayListEmployee);
-        Employee* unEmpleado;
+
         for(i=0; i<len; i++)
         {
             unEmpleado=(Employee*)ll_get(pArrayListEmployee,i);
@@ -224,7 +225,6 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
         }
         retorno=1;
     }
-
     return retorno;;
 }
 
@@ -237,7 +237,7 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
 {
-    int retorno;
+    int retorno=-1;
     int opcion;
     int orden;
 
@@ -251,7 +251,6 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
             case 1:
                orden=pedirEntero("Ingrese '1' para ordenar de manera descendete o '2' para ordenarlo de manera ascendente");
                ll_sort(pArrayListEmployee,compararPorNombre,orden-1);
-
                 break;
             case 2:
                 orden=pedirEntero("Ingrese '1' para ordenar de manera descendete o '2' para ordenarlo de manera ascendente");
@@ -259,28 +258,21 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
                 break;
             case 3:
                 orden=pedirEntero("Ingrese '1' para ordenar de manera descendete o '2' para ordenarlo de manera ascendente");
-
+                ll_sort(pArrayListEmployee,compararPorHorasTrabajadas,orden-1);
                 break;
             case 4:
                 orden=pedirEntero("Ingrese '1' para ordenar de manera descendete o '2' para ordenarlo de manera ascendente");
-
+                ll_sort(pArrayListEmployee,compararPorSueldo,orden-1);
                 break;
             case 5:
                 printf("Saliendo");
                 break;
             default:
                 printf("Opcion incorrecta");
-
             }
         }while(opcion!=5);
         retorno=1;
-
-
-
     }
-
-
-
     return retorno;
 }
 
@@ -293,7 +285,7 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_saveAsText(char* path, LinkedList* pArrayListEmployee)
 {
-    int state=-1;
+    int retorno=-1;
     FILE* pArchivo;
     Employee* unEmpleado;
     int i;
@@ -319,11 +311,9 @@ int controller_saveAsText(char* path, LinkedList* pArrayListEmployee)
 
         }
         fclose(pArchivo);
-        state=0;
+        retorno=1;
     }
-
-
-    return state;
+    return retorno;
 }
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo binario).
@@ -335,8 +325,26 @@ int controller_saveAsText(char* path, LinkedList* pArrayListEmployee)
  */
 int controller_saveAsBinary(char* path, LinkedList* pArrayListEmployee)
 {
+    FILE* pArchivo;
 
-    return 1;
+    int retorno=-1;
+    Employee* unEmpleado;
+    int len;
+    int i;
+    pArchivo=fopen(path,"wb");
+
+    if(pArrayListEmployee!=NULL && pArchivo !=NULL)
+    {
+        len=ll_len(pArrayListEmployee);
+        for(i=0;i<len;i++)
+        {
+            unEmpleado=(Employee*)ll_get(pArrayListEmployee,i);
+            fwrite(unEmpleado,sizeof(Employee),1,pArchivo);
+        }
+        fclose(pArchivo);
+        retorno=1;
+    }
+    return retorno;
 }
 
 int dameMayorId(LinkedList* pArrayListEmployee)
@@ -350,23 +358,18 @@ int dameMayorId(LinkedList* pArrayListEmployee)
 
     if(pArrayListEmployee!=NULL)
     {
-
         len=ll_len(pArrayListEmployee);
         for(i=25;i<len;i++)
         {
             unEmpleado = (Employee*)ll_get(pArrayListEmployee,i);
-
             if(flag == 0 || unEmpleado->id > idMayor)
             {
                 idMayor=unEmpleado->id;
                 retorno=idMayor;
                 flag=1;
-
             }
         }
-
     }
-
     return retorno;
 }
 
