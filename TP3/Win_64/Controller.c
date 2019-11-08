@@ -12,10 +12,21 @@ int controller_loadFromText(char* path, LinkedList* pArrayListEmployee)
 {
     FILE* pArchivo;
     int retorno=-1;
+    int estaVacio=0;
     pArchivo = fopen(path,"rb");
+
     if(pArchivo!=NULL)
     {
-        retorno=parser_EmployeeFromText(pArchivo,pArrayListEmployee);
+        estaVacio=ll_isEmpty(pArrayListEmployee);
+        if(estaVacio==1)
+        {
+            retorno=parser_EmployeeFromText(pArchivo,pArrayListEmployee);
+
+        }
+        else
+        {
+            retorno=2;
+        }
     }
     return retorno;
 }
@@ -31,11 +42,22 @@ int controller_loadFromBinary(char* path, LinkedList* pArrayListEmployee)
 {
     FILE* pArchivo;
     int retorno=-1;
+    int estaVacio=0;
     pArchivo=fopen(path,"rb");
+
     if(pArchivo!= NULL && pArrayListEmployee !=NULL)
     {
-        retorno=parser_EmployeeFromBinary(pArchivo,pArrayListEmployee);
+        estaVacio=ll_isEmpty(pArrayListEmployee);
+        if(estaVacio==1)
+        {
+            retorno=parser_EmployeeFromBinary(pArchivo,pArrayListEmployee);
+        }
+        else
+        {
+            retorno=2;
+        }
     }
+
     return retorno;
 }
 
@@ -101,8 +123,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
     {
         controller_ListEmployee(pArrayListEmployee);
         id=pedirEntero("Ingrese el ID del empleado que desea modificar: ");
-        id--;
-        unEmpleado=(Employee*)ll_get(pArrayListEmployee,id);
+        unEmpleado=controller_getEmpleadoPorId(pArrayListEmployee,id);
         if(unEmpleado!=NULL)
         {
             auxEmpleado=unEmpleado;
@@ -143,11 +164,13 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
                 {
                     unEmpleado=auxEmpleado;
                     retorno=1;
-                }else
+                }
+                else
                 {
                     retorno=2;
                 }
-            }else
+            }
+            else
             {
                 retorno=3;
             }
@@ -213,7 +236,7 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
     if(pArrayListEmployee!=NULL)
     {
         len=ll_len(pArrayListEmployee);
-
+        printf("%4s%15s%4s%8s\n","Id","Nombre","Horas Trabajadas","Sueldo");
         for(i=0; i<len; i++)
         {
             unEmpleado=(Employee*)ll_get(pArrayListEmployee,i);
@@ -249,8 +272,8 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
             switch(opcion)
             {
             case 1:
-               orden=pedirEntero("Ingrese '1' para ordenar de manera descendete o '2' para ordenarlo de manera ascendente");
-               ll_sort(pArrayListEmployee,compararPorNombre,orden-1);
+                orden=pedirEntero("Ingrese '1' para ordenar de manera descendete o '2' para ordenarlo de manera ascendente");
+                ll_sort(pArrayListEmployee,compararPorNombre,orden-1);
                 break;
             case 2:
                 orden=pedirEntero("Ingrese '1' para ordenar de manera descendete o '2' para ordenarlo de manera ascendente");
@@ -270,7 +293,8 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
             default:
                 printf("Opcion incorrecta");
             }
-        }while(opcion!=5);
+        }
+        while(opcion!=5);
         retorno=1;
     }
     return retorno;
@@ -336,7 +360,7 @@ int controller_saveAsBinary(char* path, LinkedList* pArrayListEmployee)
     if(pArrayListEmployee!=NULL && pArchivo !=NULL)
     {
         len=ll_len(pArrayListEmployee);
-        for(i=0;i<len;i++)
+        for(i=0; i<len; i++)
         {
             unEmpleado=(Employee*)ll_get(pArrayListEmployee,i);
             fwrite(unEmpleado,sizeof(Employee),1,pArchivo);
@@ -359,7 +383,7 @@ int dameMayorId(LinkedList* pArrayListEmployee)
     if(pArrayListEmployee!=NULL)
     {
         len=ll_len(pArrayListEmployee);
-        for(i=25;i<len;i++)
+        for(i=25; i<len; i++)
         {
             unEmpleado = (Employee*)ll_get(pArrayListEmployee,i);
             if(flag == 0 || unEmpleado->id > idMayor)
@@ -380,7 +404,7 @@ void* controller_getEmpleadoPorId(LinkedList* pArrayListEmployee,int id)
     Employee* unEmpleado=NULL;
 
     len=ll_len(pArrayListEmployee);
-    for(i=0;i<len;i++)
+    for(i=0; i<len; i++)
     {
         unEmpleado=(Employee*)ll_get(pArrayListEmployee,i);
         if(unEmpleado->id==id)
