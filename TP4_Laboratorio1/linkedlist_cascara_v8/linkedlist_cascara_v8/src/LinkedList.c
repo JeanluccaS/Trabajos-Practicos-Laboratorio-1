@@ -251,7 +251,7 @@ int ll_remove(LinkedList* this,int index)
         len=ll_len(this);//obtengo el largo de la lista.
         if(index<len)
         {
-            pAux=getNode(this,index-1);//obtengo el
+            pAux=getNode(this,index-1);//obtengo el nodo anterior al que quiero eliminar
             pNode=getNode(this,index);//obtengo el elemento a elminar, que hace refrencia al siguiente.
             if(index==0)
             {
@@ -369,7 +369,7 @@ int ll_isEmpty(LinkedList* this)
 
     if(this!=NULL)
     {
-        len=ll_len(this);
+        len=ll_len(this);  //se va a utilizar ademas para verificar que hayan elementos en la lista.
         if(len==0)
         {
             returnAux=1;
@@ -400,8 +400,7 @@ int ll_push(LinkedList* this, int index, void* pElement)
         len=ll_len(this);
         if(index<=len)
         {
-            addNode(this,index,pElement);
-            returnAux=0;
+            returnAux=addNode(this,index,pElement);
         }
     }
 
