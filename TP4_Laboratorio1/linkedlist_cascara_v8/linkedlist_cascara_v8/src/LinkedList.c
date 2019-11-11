@@ -193,7 +193,7 @@ void* ll_get(LinkedList* this, int index)
     if(this!=NULL)
     {
         len=ll_len(this);
-        if(index >= 0 && index<=len)//en este caso el index tiene que ser menor al len. ya que el len es la cantidad de elementos, y el index la posicion de estos.
+        if(index >= 0 && index<len)//en este caso el index tiene que ser menor al len. ya que el len es la cantidad de elementos, y el index la posicion de estos.
         {
             pNode=getNode(this,index);
             returnAux=pNode->pElement;//Busco a la persona y la obtengo.
@@ -316,6 +316,7 @@ int ll_deleteLinkedList(LinkedList* this)
     {
         ll_clear(this);
         free(this);
+        this=NULL;
         returnAux=0;
     }
 
@@ -419,7 +420,21 @@ int ll_push(LinkedList* this, int index, void* pElement)
 void* ll_pop(LinkedList* this,int index)
 {
     void* returnAux = NULL;
+    int len;
 
+    if(this!=NULL)
+    {
+        len=ll_len(this);
+        if(index>=0 && index<len)
+        {
+            returnAux=ll_get(this,index);
+            if(returnAux!=NULL)
+            {
+                ll_remove(this,index);
+            }
+
+        }
+    }
     return returnAux;
 }
 
@@ -435,6 +450,20 @@ void* ll_pop(LinkedList* this,int index)
 int ll_contains(LinkedList* this, void* pElement)
 {
     int returnAux = -1;
+    int exist;
+    if(this!=NULL)
+    {
+        exist=ll_indexOf(this,pElement);
+        {
+            if(exist==-1)
+            {
+                returnAux=0;
+            }else
+            {
+                returnAux=1;
+            }
+        }
+    }
 
     return returnAux;
 }
@@ -451,6 +480,30 @@ int ll_contains(LinkedList* this, void* pElement)
 int ll_containsAll(LinkedList* this,LinkedList* this2)
 {
     int returnAux = -1;
+    int len;
+    int i;
+    int exist=0;
+    void* pElement;
+
+    if(this!=NULL  && this2!=NULL)
+    {
+        len=ll_len(this);
+        returnAux=1;
+        for(i=0;i<len;i++)
+        {
+
+            pElement=ll_get(this2,i);
+            exist=ll_contains(this,pElement);
+            if(exist!=1)
+            {
+
+                returnAux=0;
+                  break;
+            }
+        }
+
+    }
+
 
     return returnAux;
 }
@@ -468,6 +521,24 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
 LinkedList* ll_subList(LinkedList* this,int from,int to)
 {
     LinkedList* cloneArray = NULL;
+    int len;
+    if(this!=NULL)
+    {
+        if(from>=0 && from <len && to >=from && to<len)
+        {
+            cloneArray=ll_newLinkedList();
+            if(cloneArray!=NULL)
+            {
+
+                 for(i=from;i<to;i++)
+                 {
+                     cloneArray=ll_add(this,)
+                 }
+            }
+
+        }
+    }
+
 
     return cloneArray;
 }
