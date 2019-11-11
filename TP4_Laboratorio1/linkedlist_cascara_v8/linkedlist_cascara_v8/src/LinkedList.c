@@ -483,7 +483,7 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
     int len;
     int i;
     int exist=0;
-    void* pElement;
+    void* pElement=NULL;
 
     if(this!=NULL  && this2!=NULL)
     {
@@ -521,18 +521,21 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
 LinkedList* ll_subList(LinkedList* this,int from,int to)
 {
     LinkedList* cloneArray = NULL;
+    void* pElement=NULL;
     int len;
+    int i;
     if(this!=NULL)
     {
-        if(from>=0 && from <len && to >=from && to<len)
+        len=ll_len(this);
+        if(from>=0 && from<=len && to>=from && to<=len)
         {
             cloneArray=ll_newLinkedList();
             if(cloneArray!=NULL)
             {
-
                  for(i=from;i<to;i++)
                  {
-                     cloneArray=ll_add(this,)
+                     pElement=ll_get(this,i);
+                     ll_add(cloneArray,pElement);
                  }
             }
 
